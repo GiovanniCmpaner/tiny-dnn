@@ -11,11 +11,11 @@
 #include <string>
 #include <utility>
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(ESP32)
 #include <malloc.h>
 #endif
 
-#ifdef __MINGW32__
+#if defined(__MINGW32__)
 #include <mm_malloc.h>
 #endif
 
@@ -93,7 +93,9 @@ class aligned_allocator {
     return ::memalign(align, size);
 #elif defined(__MINGW32__)
     return ::_mm_malloc(size, align);
-#else  // posix assumed
+#elif defined(ESP32)
+    return ::memalign(align, size);
+#else // posix assumed
     void *p;
     if (::posix_memalign(&p, align, size) != 0) {
       p = 0;

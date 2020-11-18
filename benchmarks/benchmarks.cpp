@@ -5,6 +5,9 @@
     Use of this source code is governed by a BSD-style license that can be found
     in the LICENSE file.
 */
+
+#ifndef ESP32
+
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
 #endif
@@ -15,3 +18,5 @@
 using namespace tiny_dnn::benchmarks;
 
 BENCHMARK_MAIN();
+
+#endif
